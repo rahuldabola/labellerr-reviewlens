@@ -10,4 +10,4 @@ jobs:
           python-version: "3.11"
       - run: pip install numpy pillow requests pytest ruff
       - run: ruff check reviewlens scripts tests
-      - run: pytest -q tests
+      - run: python -m pytest -q tests
