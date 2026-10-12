@@ -2,6 +2,8 @@
 
 A proof of concept for Labellerr's review stage. ReviewLens checks human annotations against a detector's predictions. It flags likely mistakes and reorders the review queue so reviewers open the riskiest files first. It then hands that queue back to Labellerr through the official SDK.
 
+**Live report:** https://rahuldabola.github.io/labellerr-reviewlens/ (interactive chart + visual review queue)
+
 ![Errors caught vs review effort](docs/img/report_top.png)
 
 ## The problem I noticed
@@ -63,7 +65,7 @@ I injected realistic annotator mistakes with a seeded answer key: dropped boxes,
 * **It finds real errors in COCO itself.** On the *original* labels I eyeballed the 20 highest-scoring flags (see [docs/img](docs/img)): ~10 look like genuine errors (unlabelled pedestrians and spectators, small cars labelled "truck", a bowl labelled "cup"), ~4 are guideline-ambiguous, and ~6 are model false alarms. That roughly matches the published finding that about half of algorithmically flagged label errors are real (Northcutt et al., NeurIPS 2021).
 * **Annotator attribution is a weak signal.** The careless annotator does get the highest flag score per 100 images (151, versus 92–130 for the others), but image difficulty adds noise. It is a lead for the Quality Metrics dashboard, not a verdict on a person.
 
-Open [`docs/report.html`](docs/report.html) in a browser (self-contained, works offline) for the interactive chart and the visual review queue.
+See the [live report](https://rahuldabola.github.io/labellerr-reviewlens/) (also in [`docs/report.html`](docs/report.html), self-contained, works offline) for the interactive chart and the visual review queue.
 
 ## Run it
 
@@ -94,6 +96,8 @@ python -m reviewlens.cli triage --labels export.json --images imgs/ --out out/
 python -m reviewlens.cli push --project <project_id> --queue out/queue.csv \
     --top 0.2 --reviewer lead@team.com                                         # dry run; add --apply to call bulk_assign_files
 ```
+
+**End-to-end live test:** `scripts/live_roundtrip.py` creates a dataset, template and project in a real workspace, uploads noisy labels, then runs pull → triage → push and writes a log to `docs/live_roundtrip.md`. Copy `.env.example` to `.env`, fill in your API keys, then run `python -m scripts.live_roundtrip --n 30`.
 
 `pull` and `push` follow the SDK source (`create_local_export`, `list_files`, `bulk_assign_files`), but **I haven't run them against a live workspace yet**. Response fields I couldn't confirm are marked `ASSUMPTION` in `reviewlens/labellerr_io.py`. Suggested fixes are written to `suggested_fixes_coco.json` with a Magic-Wand-style `conf_bucket` per annotation. They are **not** uploaded automatically, because I don't know whether `upload_preannotations` merges with or overwrites human labels on an already-annotated file.
 

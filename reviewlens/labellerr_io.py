@@ -64,7 +64,8 @@ def file_ids_by_name(project_id: str, statuses=REVIEW_STATUSES, page: int = 500)
 
 
 def push_review_queue(project_id: str, ranked_rows: list[dict], top_fraction: float,
-                      senior_reviewer: str | None, dry_run: bool = True) -> dict:
+                      senior_reviewer: str | None, dry_run: bool = True,
+                      statuses=REVIEW_STATUSES) -> dict:
     """Route the riskiest files to a (senior) reviewer first.
 
     Low-risk files are left exactly where they are, so a team can still spot-check
@@ -76,7 +77,7 @@ def push_review_queue(project_id: str, ranked_rows: list[dict], top_fraction: fl
             "files": [r["file_name"] for r in top]}
     if dry_run:
         return plan
-    ids = file_ids_by_name(project_id)
+    ids = file_ids_by_name(project_id, statuses=statuses)
     missing = [r["file_name"] for r in top if r["file_name"] not in ids]
     if missing:
         raise RuntimeError(f"{len(missing)} ranked files not found in project, e.g. {missing[:3]}")
