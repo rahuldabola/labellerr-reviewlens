@@ -1,0 +1,77 @@
+[
+ {
+  "scale": 0.25,
+  "mean": {
+   "err_rate": 0.04077367718986216,
+   "files_with_errors": 0.23633333333333334,
+   "c20_ReviewLens ranking": 0.5354880373063688,
+   "c20_Random order (status quo)": 0.19908658188932787,
+   "c20_Most labels first": 0.47370413345192064,
+   "e80_ReviewLens ranking": 0.39399999999999996,
+   "e80_Random order (status quo)": 0.7986416666666667,
+   "e80_Most labels first": 0.513,
+   "p100": 0.466
+  },
+  "std": {
+   "err_rate": 0.0030631933569852986,
+   "files_with_errors": 0.015033296378372913,
+   "c20_ReviewLens ranking": 0.017919673809815392,
+   "c20_Random order (status quo)": 0.0012741289915847117,
+   "c20_Most labels first": 0.009419087995392511,
+   "e80_ReviewLens ranking": 0.03036079343129519,
+   "e80_Random order (status quo)": 0.0026264043862284504,
+   "e80_Most labels first": 0.04782375049189589,
+   "p100": 0.04223742416388576
+  }
+ },
+ {
+  "scale": 0.5,
+  "mean": {
+   "err_rate": 0.08230324588706092,
+   "files_with_errors": 0.3803333333333333,
+   "c20_ReviewLens ranking": 0.5444041619783528,
+   "c20_Random order (status quo)": 0.19990547783175633,
+   "c20_Most labels first": 0.49065787189364024,
+   "e80_ReviewLens ranking": 0.41,
+   "e80_Random order (status quo)": 0.7984083333333334,
+   "e80_Most labels first": 0.47133333333333327,
+   "p100": 0.682
+  },
+  "std": {
+   "err_rate": 0.0035359529305595432,
+   "files_with_errors": 0.0168457050246577,
+   "c20_ReviewLens ranking": 0.017285087205462974,
+   "c20_Random order (status quo)": 0.0015520058734338985,
+   "c20_Most labels first": 0.018791884438338374,
+   "e80_ReviewLens ranking": 0.010593499054713818,
+   "e80_Random order (status quo)": 0.002552961243558357,
+   "e80_Most labels first": 0.02425329301810834,
+   "p100": 0.026381811916545823
+  }
+ },
+ {
+  "scale": 1.0,
+  "mean": {
+   "err_rate": 0.16429524232992443,
+   "files_with_errors": 0.5616666666666666,
+   "c20_ReviewLens ranking": 0.5261136721692998,
+   "c20_Random order (status quo)": 0.1994893622767053,
+   "c20_Most labels first": 0.4881329787684551,
+   "e80_ReviewLens ranking": 0.44033333333333335,
+   "e80_Random order (status quo)": 0.7993133333333333,
+   "e80_Most labels first": 0.4916666666666667,
+   "p100": 0.852
+  },
+  "std": {
+   "err_rate": 0.004080060381308828,
+   "files_with_errors": 0.022135943621178683,
+   "c20_ReviewLens ranking": 0.021331094296255942,
+   "c20_Random order (status quo)": 0.0003638119807722375,
+   "c20_Most labels first": 0.014105056219359176,
+   "e80_ReviewLens ranking": 0.019304576314093668,
+   "e80_Random order (status quo)": 0.0019351471376730627,
+   "e80_Most labels first": 0.013123346456686346,
+   "p100": 0.033105890714493685
+  }
+ }
+]

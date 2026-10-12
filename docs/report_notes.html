@@ -1,0 +1,24 @@
+<h2>Does it hold up?</h2>
+<p class="muted">Same 600 images, 5 random seeds per row, three error rates. "Most labels first" is a deliberately strong, model-free baseline:
+crowded images simply contain more mistakes.</p>
+<div class="card"><table>
+<tr><th>Label error rate</th><th class="n">Files with ≥1 error</th><th class="n">Caught in top 20% of files<br><span class="muted">ReviewLens / random / most labels</span></th><th class="n">Files to review for 80% of errors<br><span class="muted">ReviewLens / random / most labels</span></th><th class="n">Top-100 flags that hit an injected error</th></tr>
+<tr><td>4%</td><td class="n">24%</td><td class="n"><b>54%</b> ±2 / 20% / 47%</td><td class="n"><b>39%</b> / 80% / 51%</td><td class="n">47%</td></tr>
+<tr><td>8%</td><td class="n">38%</td><td class="n"><b>54%</b> ±2 / 20% / 49%</td><td class="n"><b>41%</b> / 80% / 47%</td><td class="n">68%</td></tr>
+<tr><td>16%</td><td class="n">56%</td><td class="n"><b>53%</b> ±2 / 20% / 49%</td><td class="n"><b>44%</b> / 80% / 49%</td><td class="n">85%</td></tr>
+</table></div>
+
+<h2>It also finds real mistakes in COCO itself</h2>
+<p>I ran ReviewLens on the <i>original</i> COCO labels (no noise injected) and eyeballed the 20 highest-scoring flags:
+<b>~10 look like genuine labelling errors</b> (unlabelled pedestrians, spectators and a skier; a car cut off at the image edge; small cars labelled "truck"; a bowl labelled "cup"),
+<b>~4 are genuinely ambiguous</b> (a cake in a pan labelled "bowl", a terracotta vase vs. cup), exactly the cases a project guideline should settle,
+and <b>~6 are model false alarms</b> (a person on a bus poster, a ball basket seen as a chair). That also explains part of the "precision" gap above: some flags that miss the answer key are real errors in COCO.
+This is one person's thumbnail-level judgement, not a labelled study.</p>
+
+<h2>Caveats I would not hide from a customer</h2>
+<ul class="muted">
+<li>Injected errors are a simulation. Real annotator mistakes are subtler (borderline boxes, guideline misreads), so these numbers are an upper bound on ease and a lower bound on usefulness for gross errors.</li>
+<li>The detector (YOLO11m, COCO-pretrained) is in-domain here. On a customer's niche domain you would use their own checkpoint from the active-learning loop; the self-calibration downweights classes the model is bad at, but a weak model still means weaker triage.</li>
+<li>About half of injected "missing labels" are not flagged: mostly tiny or occluded objects the model cannot see either.</li>
+<li>Labellerr round-trip code is written against the official SDK source but has not been run against a live workspace yet.</li>
+</ul>

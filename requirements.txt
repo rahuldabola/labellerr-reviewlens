@@ -1,0 +1,7 @@
+numpy
+pillow
+requests
+ultralytics>=8.3     # only for `predict`; bring your own predictions JSON to skip it
+pytest
+# Labellerr round trip (pull/push):
+# pip install git+https://github.com/Labellerr/SDKPython.git
